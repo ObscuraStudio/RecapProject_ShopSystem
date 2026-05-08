@@ -1,5 +1,7 @@
 # Recap_Project — Backend Shop System
 
+[![Java CI](https://github.com/ObscuraStudio/RecapProject_ShopSystem/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/ObscuraStudio/RecapProject_ShopSystem/actions)
+
 A Shop Service System, which controls and tracks all products & orders.
 
 ## Build, Run & Tests
