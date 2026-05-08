@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class OrderListRepo {
+
+    private final List<Order> orders = new ArrayList<>();
+
+    // Methods for adding and retrieving orders
+
+    public void addOrder(Order order) {
+        System.out.println("Order added.");
+        orders.add(order);
+    }
+
+    public void removeOrder(int id) {
+        for (int i = 0; i < orders.size(); i++) {
+            if (orders.get(i).id() == id) {
+                Order order = orders.get(i);
+                orders.remove(i);
+                System.out.println("Order " + order.id() + " removed.");
+                return;
+            }
+        }
+        System.out.println("Order not found.");
+    }
+
+    public Order getOrder(int id) {
+        for (Order order : orders) {
+            if (order.id() == id) {
+                System.out.println("Order found.");
+                return order;
+            }
+        }
+        System.out.println("Order not found.");
+        return null;
+    }
+
+    public List<Order> getAllOrders() {
+        System.out.println("All orders:");
+        System.out.println();
+        System.out.println(orders);
+        return new ArrayList<>(orders);
+    }
+
+
+}

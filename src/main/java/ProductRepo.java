@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ProductRepo {
 
@@ -38,10 +37,8 @@ public class ProductRepo {
 
     public List<Product> getAllProducts() {
         System.out.println("\nAll products in inventory:\n");
-        for (Product product : products) {
-            System.out.println(product.name());
-        }
-        return List.of();
+        System.out.println(products);
+        return new ArrayList<>(products);
     }
 
 }

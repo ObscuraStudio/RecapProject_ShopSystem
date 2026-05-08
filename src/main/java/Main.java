@@ -1,16 +1,22 @@
+import java.util.Collections;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        ProductRepo repo = new ProductRepo();
+        ProductRepo productRepo = new ProductRepo();
+        OrderListRepo orderRepo = new OrderListRepo();
 
         System.out.println();
-        repo.addProduct(new Product(1, "Iron Sword"));
-        repo.addProduct(new Product(2, "Iron Shield"));
-        repo.addProduct(new Product(3, "Iron Armor"));
+        productRepo.addProduct(new Product(1, "Iron Sword"));
+        productRepo.addProduct(new Product(2, "Iron Shield"));
+        productRepo.addProduct(new Product(3, "Iron Armor"));
         System.out.println();
-        repo.removeProduct(2);
-        System.out.println(repo.getAllProducts());
-        ;
+        productRepo.removeProduct(2);
+        productRepo.getAllProducts();
+        System.out.println();
+        orderRepo.addOrder(new Order(1, Collections.singletonList((new Product(1, "Iron Sword")))));
+        System.out.println();
+        orderRepo.getAllOrders();
     }
 }
