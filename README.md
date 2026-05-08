@@ -1,0 +1,35 @@
+# Recap_Project — Backend Shop System
+
+A Shop Service System, which controls and tracks all products & orders.
+
+## Build, Run & Tests
+
+**Requirements:** Java 25+, Maven 3.8+
+
+**Run tests locally:** `mvn clean verify`
+
+**Build artifact:** `mvn package`
+
+Produces a JAR in `target/*.jar`.
+
+## Project Structure
+
+src/main/java/→ Main.java (validator logic)
+
+src/test/java/→ MainTest.java (JUnit 5 tests)
+
+## CI
+
+GitHub Actions runs `mvn clean verify` on every push and pull request
+to `master`. See the badge above for current build status.
+
+## Bonus Scope
+
+- Price and quantity for products
+- Tests for all classes
+- Input reader for CLI usage
+- Color and format adjusted for outputs
+- EAN database for input (CSV format)
+- advanced product information (tracking of stock, error when not enough stock)
+- control of stock for receiving and sending
+- protocol for every action in the warehouse
