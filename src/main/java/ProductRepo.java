@@ -36,4 +36,12 @@ public class ProductRepo {
         return null;
     }
 
+    public List<Product> getAllProducts() {
+        System.out.println("\nAll products in inventory:\n");
+        for (Product product : products) {
+            System.out.println(product.name());
+        }
+        return List.of();
+    }
+
 }
