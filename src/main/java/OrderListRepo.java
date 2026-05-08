@@ -8,7 +8,6 @@ public class OrderListRepo {
     // Methods for adding and retrieving orders
 
     public void addOrder(Order order) {
-        System.out.println("Order added.");
         orders.add(order);
     }
 
@@ -27,11 +26,9 @@ public class OrderListRepo {
     public Order getOrder(int id) {
         for (Order order : orders) {
             if (order.id() == id) {
-                System.out.println("Order found.");
                 return order;
             }
         }
-        System.out.println("Order not found.");
         return null;
     }
 
