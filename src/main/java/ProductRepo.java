@@ -9,15 +9,16 @@ public class ProductRepo {
     // Methods for adding, removing, and finding products
 
     public void addProduct(Product product) {
-        System.out.println("Product added");
+        System.out.println(product.name() + " added to inventory.");
         products.add(product);
     }
 
     public void removeProduct(int id) {
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).id() == id) {
+                Product product = products.get(i);
                 products.remove(i);
-                System.out.println("Product removed");
+                System.out.println(product.name() + " removed from inventory.");
                 return;
             }
         }
