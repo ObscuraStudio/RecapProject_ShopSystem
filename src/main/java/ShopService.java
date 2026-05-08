@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShopService {
@@ -15,7 +14,7 @@ public class ShopService {
         List<Product> orderedProducts = order.products();
 
         for (Product product : orderedProducts) {
-            if (productRepo.getProduct(product.id()) == null) {
+            if (productRepo.getProductById(product.id()) == null) {
                 System.out.println("Product with ID " + product.id() + " does not exist.");
                 return;
             } else {

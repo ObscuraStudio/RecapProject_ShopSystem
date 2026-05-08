@@ -24,7 +24,7 @@ public class ProductRepo {
         System.out.println("Product not found");
     }
 
-    public Product getProduct(int id) {
+    public Product getProductById(int id) {
         for (Product product : products) {
             if (product.id() == id) {
                 return product;

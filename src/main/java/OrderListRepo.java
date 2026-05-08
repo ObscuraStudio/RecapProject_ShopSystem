@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderListRepo {
+public class OrderListRepo implements OrderRepo {
 
     private final List<Order> orders = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class OrderListRepo {
         System.out.println("Order not found.");
     }
 
-    public Order getOrder(int id) {
+    public Order getOrderById(int id) {
         for (Order order : orders) {
             if (order.id() == id) {
                 return order;
