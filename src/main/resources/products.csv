@@ -1,0 +1,31 @@
+id,name,price
+1,Iron Sword,120.00
+2,Steel Sword,350.00
+3,Mythril Blade,1200.00
+4,Flame Saber,2500.00
+5,Ice Brand,2500.00
+6,Wooden Shield,80.00
+7,Iron Shield,200.00
+8,Mythril Shield,1100.00
+9,Leather Armor,150.00
+10,Chain Mail,500.00
+11,Mythril Armor,1800.00
+12,Dragon Mail,4500.00
+13,Leather Helm,100.00
+14,Iron Helm,280.00
+15,Potion,50.00
+16,Hi-Potion,150.00
+17,Mega-Potion,500.00
+18,Elixir,5000.00
+19,Phoenix Down,1000.00
+20,Antidote,30.00
+21,Eye Drops,30.00
+22,Echo Herbs,50.00
+23,Tent,200.00
+24,Ether,800.00
+25,Power Gloves,350.00
+26,Speed Boots,400.00
+27,Fire Ring,1500.00
+28,Ice Ring,1500.00
+29,Thunder Ring,1500.00
+30,Amulet of Protection,3000.00

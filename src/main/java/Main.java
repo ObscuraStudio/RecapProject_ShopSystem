@@ -1,4 +1,3 @@
-import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,6 +9,7 @@ public class Main {
         // constructing the repositories and the service + scanner
 
         ProductRepo productRepo = new ProductRepo();
+        CsvProductLoader.loadProducts(productRepo, "products.csv");
         OrderMapRepo orderRepo = new OrderMapRepo();
         ShopService shopService = new ShopService(productRepo, orderRepo);
         Scanner scanner = new Scanner(System.in);
