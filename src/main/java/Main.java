@@ -7,16 +7,17 @@ public class Main {
         // constructing the repositories
 
         ProductRepo productRepo = new ProductRepo();
-        OrderListRepo orderRepo = new OrderListRepo();
+        OrderMapRepo orderRepo = new OrderMapRepo();
 
         // adding and removing products, then getting all products
 
-        productRepo.addProduct(new Product(1, "Iron Sword"));
-        productRepo.addProduct(new Product(2, "Iron Shield"));
-        productRepo.addProduct(new Product(3, "Iron Armor"));
-        productRepo.addProduct(new Product(4, "Iron Gloves"));
-        productRepo.addProduct(new Product(5, "Iron Boots"));
+        productRepo.addProduct(new Product(1, "Iron Sword", 25.00));
+        productRepo.addProduct(new Product(2, "Iron Shield", 20.00));
+        productRepo.addProduct(new Product(3, "Iron Armor", 40.00));
+        productRepo.addProduct(new Product(4, "Iron Gloves", 15.00));
+        productRepo.addProduct(new Product(5, "Iron Boots", 20.00));
         productRepo.getAllProducts();
+        System.out.println();
 
         // constructing the service
 
@@ -24,9 +25,15 @@ public class Main {
 
         // placing an order
 
-        shopService.placeOrder(new Order
-                (1, Collections.singletonList(new Product
-                        (1, "Iron Sword"))));
+        Order firstOrder =
+                (new Order
+                        (1, Collections.singletonList
+                                (new OrderItem
+                                        (new Product(1, "Iron Sword", 25.0), 3
+                                        ))));
+
+        shopService.placeOrder(firstOrder);
+        System.out.println("Order total: " + firstOrder.getTotal());
 
         // getting all orders
 

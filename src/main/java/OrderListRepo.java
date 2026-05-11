@@ -16,7 +16,6 @@ public class OrderListRepo implements OrderRepo {
             if (orders.get(i).id() == id) {
                 Order order = orders.get(i);
                 orders.remove(i);
-                System.out.println("Order " + order.id() + " removed.");
                 return;
             }
         }
@@ -33,7 +32,6 @@ public class OrderListRepo implements OrderRepo {
     }
 
     public List<Order> getAllOrders() {
-        System.out.println("All orders:");
         System.out.println();
         System.out.println(orders);
         return new ArrayList<>(orders);

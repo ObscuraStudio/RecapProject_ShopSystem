@@ -8,7 +8,6 @@ public class ProductRepo {
     // Methods for adding, removing, and finding products
 
     public void addProduct(Product product) {
-        System.out.println(product.name() + " added to inventory.");
         products.add(product);
     }
 
@@ -17,7 +16,6 @@ public class ProductRepo {
             if (products.get(i).id() == id) {
                 Product product = products.get(i);
                 products.remove(i);
-                System.out.println(product.name() + " removed from inventory.");
                 return;
             }
         }
@@ -34,7 +32,6 @@ public class ProductRepo {
     }
 
     public List<Product> getAllProducts() {
-        System.out.println("\nAll products in inventory:\n");
         System.out.println(products);
         return new ArrayList<>(products);
     }

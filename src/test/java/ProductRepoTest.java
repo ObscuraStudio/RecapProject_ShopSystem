@@ -1,0 +1,40 @@
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+class ProductRepoTest {
+
+    @Test
+    void addProduct_shouldAddProductToList() {
+        // Arrange - set up what we need
+        ProductRepo repo = new ProductRepo();
+        Product sword = new Product(1, "Iron Sword", 25.0);
+
+        // Act - do the thing we're testing
+        repo.addProduct(sword);
+
+        // Assert - check the result
+        assertThat(repo.getAllProducts()).hasSize(1);
+        assertThat(repo.getAllProducts().get(0).name()).isEqualTo("Iron Sword");
+    }
+
+    @Test
+    void getProductById_shouldReturnProduct_whenProductExists() {
+        ProductRepo repo = new ProductRepo();
+        repo.addProduct(new Product(1, "Iron Sword", 25.0));
+
+        Product result = repo.getProductById(1);
+
+        assertThat(result).isNotNull();
+        assertThat(result.name()).isEqualTo("Iron Sword");
+    }
+
+    @Test
+    void getProductById_shouldReturnNull_whenProductDoesNotExist() {
+        ProductRepo repo = new ProductRepo();
+
+        Product result = repo.getProductById(99);
+
+        assertThat(result).isNull();
+    }
+}

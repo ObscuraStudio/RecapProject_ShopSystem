@@ -3,26 +3,24 @@ import java.util.List;
 public class ShopService {
 
     private final ProductRepo productRepo;
-    private final OrderListRepo orderRepo;
+    private final OrderMapRepo orderRepo;
 
-    public ShopService(ProductRepo productRepo, OrderListRepo orderRepo) {
+    public ShopService(ProductRepo productRepo, OrderMapRepo orderRepo) {
         this.productRepo = productRepo;
         this.orderRepo = orderRepo;
     }
 
     public void placeOrder(Order order) {
-        List<Product> orderedProducts = order.products();
+        List<OrderItem> orderedProducts = order.products();
 
-        for (Product product : orderedProducts) {
-            if (productRepo.getProductById(product.id()) == null) {
-                System.out.println("Product with ID " + product.id() + " does not exist.");
+        for (OrderItem product : orderedProducts) {
+            if (productRepo.getProductById(product.getProduct().id()) == null) {
+                System.out.println("Product with ID " + product.getProduct().id() + " does not exist.");
                 return;
-            } else {
-                System.out.println("Product with ID " + product.id() + " added to order.");
-                orderRepo.addOrder(order);
             }
+
         }
+        orderRepo.addOrder(order);
+        System.out.println("Order placed successfully.");
     }
-
-
 }

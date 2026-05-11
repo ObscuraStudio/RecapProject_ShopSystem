@@ -1,2 +1,2 @@
-public record Product(int id, String name) {
+public record Product(int id, String name, double price) {
 }
