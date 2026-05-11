@@ -8,7 +8,13 @@ public class ProductRepo {
     // Methods for adding, removing, and finding products
 
     public void addProduct(Product product) {
+        Product existing = getProductById(product.id());
+        if (existing != null) {
+            System.out.println(ConsoleColors.error("ID " + product.id() + " is already taken by " + existing.name()));
+            return;
+        }
         products.add(product);
+        System.out.println(ConsoleColors.success(product.name() + " added to inventory."));
     }
 
     public void removeProduct(int id) {
@@ -19,7 +25,7 @@ public class ProductRepo {
                 return;
             }
         }
-        System.out.println("Product not found");
+        System.out.println(ConsoleColors.error("Product not found"));
     }
 
     public Product getProductById(int id) {

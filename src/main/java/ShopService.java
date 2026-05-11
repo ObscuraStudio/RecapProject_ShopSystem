@@ -15,12 +15,12 @@ public class ShopService {
 
         for (OrderItem product : orderedProducts) {
             if (productRepo.getProductById(product.getProduct().id()) == null) {
-                System.out.println("Product with ID " + product.getProduct().id() + " does not exist.");
+                System.out.println(ConsoleColors.error("Product with ID " + product.getProduct().id() + " does not exist."));
                 return;
             }
 
         }
         orderRepo.addOrder(order);
-        System.out.println("Order placed successfully.");
+        System.out.println(ConsoleColors.success("Order placed successfully."));
     }
 }

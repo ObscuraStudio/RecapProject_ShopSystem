@@ -30,7 +30,7 @@ to `master`. See the badge above for current build status.
 - Price and quantity for products :white_check_mark:
 - Tests for all classes :white_check_mark:
 - Input reader for CLI usage :white_check_mark:
-- Color and format adjusted for outputs
+- Color and format adjusted for outputs :white_check_mark:
 - EAN database for input (CSV format)
 - advanced product information (tracking of stock, error when not enough stock)
 - control of stock for receiving and sending
