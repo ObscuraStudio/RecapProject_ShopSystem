@@ -27,8 +27,8 @@ to `master`. See the badge above for current build status.
 
 ## Bonus Scope
 
-- Price and quantity for products
-- Tests for all classes
+- Price and quantity for products :white_check_mark:
+- Tests for all classes :white_check_mark:
 - Input reader for CLI usage
 - Color and format adjusted for outputs
 - EAN database for input (CSV format)
