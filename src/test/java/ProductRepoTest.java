@@ -37,4 +37,14 @@ class ProductRepoTest {
 
         assertThat(result).isNull();
     }
+
+    @Test
+    void removeProduct_shouldRemoveProductFromList() {
+        ProductRepo repo = new ProductRepo();
+        repo.addProduct(new Product(1, "Iron Sword", 25.0));
+        repo.addProduct(new Product(2, "Bronze Sword", 15.0));
+        repo.removeProduct(1);
+        repo.removeProduct(2);
+        assertThat(repo.getAllProducts()).isEmpty();
+    }
 }
