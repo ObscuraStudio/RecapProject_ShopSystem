@@ -16,9 +16,17 @@ Produces a JAR in `target/*.jar`.
 
 ## Project Structure
 
-src/main/java/→ Main.java (validator logic)
+src/main/java/→ Main.java (shop logic)
 
 src/test/java/→ MainTest.java (JUnit 5 tests)
+
+## Usage
+
+After building, run from the project root:
+
+​```
+java -jar target/RecapProject_ShopSystem-1.0-SNAPSHOT.jar
+​```
 
 ## CI
 
