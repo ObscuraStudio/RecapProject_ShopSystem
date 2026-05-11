@@ -19,6 +19,7 @@ public class Main {
 
         while (true) {
             System.out.println();
+            System.out.println(ConsoleColors.success("Welcome to the Shop, Adventurer!"));
             System.out.println(ConsoleColors.header("=== SHOP SYSTEM v0.1 ==="));
             System.out.println(ConsoleColors.info("1 - Add Product"));
             System.out.println(ConsoleColors.info("2 - Remove Product"));
