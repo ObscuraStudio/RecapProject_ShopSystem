@@ -13,12 +13,13 @@ public class Main {
         OrderMapRepo orderRepo = new OrderMapRepo();
         ShopService shopService = new ShopService(productRepo, orderRepo);
         Scanner scanner = new Scanner(System.in);
+        int nextOrderId = 1;
 
         // main menu loop
 
         while (true) {
             System.out.println();
-            System.out.println(ConsoleColors.header("=== Shop System ==="));
+            System.out.println(ConsoleColors.header("=== SHOP SYSTEM v0.1 ==="));
             System.out.println(ConsoleColors.info("1 - Add Product"));
             System.out.println(ConsoleColors.info("2 - Remove Product"));
             System.out.println(ConsoleColors.info("3 - Find Product"));
@@ -67,10 +68,6 @@ public class Main {
                 productRepo.getAllProducts();
 
             } else if (choice == 5) {
-                System.out.print(ConsoleColors.prompt("Order ID: "));
-                int orderId = scanner.nextInt();
-                scanner.nextLine();
-
                 List<OrderItem> items = new ArrayList<>();
 
                 while (true) {
@@ -96,7 +93,8 @@ public class Main {
                 }
 
                 if (!items.isEmpty()) {
-                    Order order = new Order(orderId, items);
+                    Order order = new Order(nextOrderId, items);
+                    nextOrderId++;
                     shopService.placeOrder(order);
                     System.out.println(ConsoleColors.success("Order total: " + order.getTotal()));
                 } else {
@@ -105,7 +103,7 @@ public class Main {
 
             } else if (choice == 6) {
                 System.out.println(ConsoleColors.header("--- All Orders ---"));
-                System.out.println(orderRepo.getAllOrders());
+                orderRepo.getAllOrders();
 
             } else if (choice == 0) {
                 System.out.println(ConsoleColors.warning("Goodbye!"));

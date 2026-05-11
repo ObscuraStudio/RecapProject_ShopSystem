@@ -19,6 +19,13 @@ public class OrderMapRepo implements OrderRepo {
     }
 
     public List<Order> getAllOrders() {
+        for (Order order : orders.values()) {
+            System.out.println("  [Order " + order.id() + "]");
+            for (OrderItem item : order.products()) {
+                System.out.println("    - " + item.getProduct().name() + " x" + item.getQuantity() + " (" + item.getProduct().price() + " Gil each)");
+            }
+            System.out.println("    Total: " + order.getTotal() + " Gil");
+        }
         return List.copyOf(orders.values());
     }
 }

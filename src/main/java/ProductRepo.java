@@ -38,7 +38,9 @@ public class ProductRepo {
     }
 
     public List<Product> getAllProducts() {
-        System.out.println(products);
+        for (Product product : products) {
+            System.out.println("  [" + product.id() + "] " + product.name() + " - " + product.price() + " Gil");
+        }
         return new ArrayList<>(products);
     }
 
