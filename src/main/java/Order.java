@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public record Order(int id, List<OrderItem> products) {
+public record Order(int id, List<OrderItem> products, OrderStatus status) {
 
     public double getTotal() {
         double total = 0;

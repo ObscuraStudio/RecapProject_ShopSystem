@@ -94,7 +94,7 @@ public class Main {
                 }
 
                 if (!items.isEmpty()) {
-                    Order order = new Order(nextOrderId, items);
+                    Order order = new Order(nextOrderId, items, OrderStatus.PROCESSING);
                     nextOrderId++;
                     shopService.placeOrder(order);
                     System.out.println(ConsoleColors.success("Order total: " + order.getTotal()));
