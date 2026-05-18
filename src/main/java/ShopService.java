@@ -11,7 +11,7 @@ public class ShopService {
     }
 
     public void placeOrder(Order order) {
-        List<OrderItem> orderedProducts = order.products();
+        List<OrderItem> orderedProducts = order.getProducts();
 
         for (OrderItem product : orderedProducts) {
             if (productRepo.getProductById(product.getProduct().id()).isEmpty()) {
@@ -22,9 +22,19 @@ public class ShopService {
         System.out.println(ConsoleColors.success("Order placed successfully."));
     }
 
+    public void updateOrder(int orderId, OrderStatus newStatus) {
+        Order existing = orderRepo.getOrderById(orderId);
+        if (existing == null) {
+            throw new IllegalArgumentException("Order with ID " + orderId + " does not exist.");
+        }
+        Order updated = existing.withStatus(newStatus);
+        orderRepo.addOrder(updated);
+
+    }
+
     public List<Order> getOrderByStatus(OrderStatus status) {
         return orderRepo.getAllOrders().stream()
-                .filter(order -> order.status() == status)
+                .filter(order -> order.getStatus() == status)
                 .toList();
 
     }

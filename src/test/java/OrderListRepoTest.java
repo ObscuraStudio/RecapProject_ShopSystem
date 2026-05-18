@@ -16,7 +16,7 @@ class OrderListRepoTest {
 
         repo.addOrder(testOrder);
         assertThat(repo.getAllOrders()).hasSize(1);
-        assertThat(repo.getAllOrders().get(0).id()).isEqualTo(1);
+        assertThat(repo.getAllOrders().get(0).getId()).isEqualTo(1);
     }
 
     @Test
@@ -42,7 +42,7 @@ class OrderListRepoTest {
         repo.addOrder(testOrder);
         Order result = repo.getOrderById(1);
         assertThat(result).isNotNull();
-        assertThat(result.id()).isEqualTo(1);
+        assertThat(result.getId()).isEqualTo(1);
     }
 
     @Test

@@ -1,7 +1,16 @@
 import java.util.List;
-import java.util.ArrayList;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.With;
 
-public record Order(int id, List<OrderItem> products, OrderStatus status) {
+@Getter
+@AllArgsConstructor
+public class Order {
+
+    private final int id;
+    private final List<OrderItem> products;
+    @With
+    private OrderStatus status;
 
     public double getTotal() {
         double total = 0;

@@ -28,10 +28,10 @@ class ShopServiceTest {
         shopService.placeOrder(testOrder);
 
         assertThat(orderRepo.getAllOrders()).hasSize(1);
-        assertThat(testOrder.products()).hasSize(3);
-        assertThat(testOrder.products().get(0).getQuantity()).isEqualTo(3);  // 3 Iron Swords
-        assertThat(testOrder.products().get(1).getQuantity()).isEqualTo(1);  // 1 Iron Armor
-        assertThat(testOrder.products().get(2).getQuantity()).isEqualTo(2);  // 2 Iron Boots
+        assertThat(testOrder.getProducts()).hasSize(3);
+        assertThat(testOrder.getProducts().get(0).getQuantity()).isEqualTo(3);  // 3 Iron Swords
+        assertThat(testOrder.getProducts().get(1).getQuantity()).isEqualTo(1);  // 1 Iron Armor
+        assertThat(testOrder.getProducts().get(2).getQuantity()).isEqualTo(2);  // 2 Iron Boots
 
         assertThat(testOrder.getTotal()).isEqualTo(155.0);  // (3*25) + (1*40) + (2*20)
     }
@@ -48,6 +48,35 @@ class ShopServiceTest {
         ), OrderStatus.PROCESSING);
 
         assertThatThrownBy(() -> shopService.placeOrder(testOrder))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("does not exist");
+    }
+
+    @Test
+    void updateOrder_shouldUpdateStatus_toInDelivery() {
+        ProductRepo productRepo = new ProductRepo();
+        OrderMapRepo orderRepo = new OrderMapRepo();
+        ShopService shopService = new ShopService(productRepo, orderRepo);
+        productRepo.addProduct(new Product(1, "Iron Sword", 25.00));
+
+        Order testOrder = new Order(1, List.of(
+                new OrderItem(new Product(1, "Iron Sword", 25.0), 1)
+        ), OrderStatus.PROCESSING);
+        shopService.placeOrder(testOrder);
+
+        shopService.updateOrder(1, OrderStatus.IN_DELIVERY);
+
+        Order updated = orderRepo.getOrderById(1);
+        assertThat(updated.getStatus()).isEqualTo(OrderStatus.IN_DELIVERY);
+    }
+
+    @Test
+    void updateOrder_shouldThrowException_IfOrderDoesNotExist() {
+        ProductRepo productRepo = new ProductRepo();
+        OrderMapRepo orderRepo = new OrderMapRepo();
+        ShopService shopService = new ShopService(productRepo, orderRepo);
+
+        assertThatThrownBy(() -> shopService.updateOrder(99, OrderStatus.IN_DELIVERY))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("does not exist");
     }

@@ -7,7 +7,7 @@ public class OrderMapRepo implements OrderRepo {
     private final Map<Integer, Order> orders = new HashMap<>();
 
     public void addOrder(Order order) {
-        orders.put(order.id(), order);
+        orders.put(order.getId(), order);
     }
 
     public void removeOrder(int id) {
@@ -20,8 +20,8 @@ public class OrderMapRepo implements OrderRepo {
 
     public List<Order> getAllOrders() {
         for (Order order : orders.values()) {
-            System.out.println("  [Order " + order.id() + "]");
-            for (OrderItem item : order.products()) {
+            System.out.println("  [Order " + order.getId() + "]");
+            for (OrderItem item : order.getProducts()) {
                 System.out.println("    - " + item.getProduct().name() + " x" + item.getQuantity() + " (" + item.getProduct().price() + " Gil each)");
             }
             System.out.println("    Total: " + order.getTotal() + " Gil");
