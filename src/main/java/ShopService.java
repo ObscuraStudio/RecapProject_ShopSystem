@@ -14,13 +14,18 @@ public class ShopService {
         List<OrderItem> orderedProducts = order.products();
 
         for (OrderItem product : orderedProducts) {
-            if (productRepo.getProductById(product.getProduct().id()) == null) {
-                System.out.println(ConsoleColors.error("Product with ID " + product.getProduct().id() + " does not exist."));
-                return;
+            if (productRepo.getProductById(product.getProduct().id()).isEmpty()) {
+                throw new IllegalArgumentException("Product with ID " + product.getProduct().id() + " does not exist.");
             }
-
         }
         orderRepo.addOrder(order);
         System.out.println(ConsoleColors.success("Order placed successfully."));
+    }
+
+    public List<Order> getOrderByStatus(OrderStatus status) {
+        return orderRepo.getAllOrders().stream()
+                .filter(order -> order.status() == status)
+                .toList();
+
     }
 }

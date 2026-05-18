@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ShopServiceTest {
 
@@ -33,5 +34,21 @@ class ShopServiceTest {
         assertThat(testOrder.products().get(2).getQuantity()).isEqualTo(2);  // 2 Iron Boots
 
         assertThat(testOrder.getTotal()).isEqualTo(155.0);  // (3*25) + (1*40) + (2*20)
+    }
+
+    @Test
+    void placeOrder_shouldThrowException_IfProductDoesNotExist() {
+        ProductRepo productRepo = new ProductRepo();
+        OrderMapRepo orderRepo = new OrderMapRepo();
+        ShopService shopService = new ShopService(productRepo, orderRepo);
+        // intentionally NOT adding any products to the repo
+
+        Order testOrder = new Order(1, List.of(
+                new OrderItem(new Product(99, "Fake Item", 100.0), 1)
+        ), OrderStatus.PROCESSING);
+
+        assertThatThrownBy(() -> shopService.placeOrder(testOrder))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("does not exist");
     }
 }

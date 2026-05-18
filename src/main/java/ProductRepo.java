@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductRepo {
 
@@ -8,9 +9,9 @@ public class ProductRepo {
     // Methods for adding, removing, and finding products
 
     public void addProduct(Product product) {
-        Product existing = getProductById(product.id());
-        if (existing != null) {
-            System.out.println(ConsoleColors.error("ID " + product.id() + " is already taken by " + existing.name()));
+        Optional<Product> existing = getProductById(product.id());
+        if (existing.isPresent()) {
+            System.out.println(ConsoleColors.error("ID " + product.id() + " is already taken by " + existing.get().name()));
             return;
         }
         products.add(product);
@@ -28,13 +29,13 @@ public class ProductRepo {
         System.out.println(ConsoleColors.error("Product not found"));
     }
 
-    public Product getProductById(int id) {
+    public Optional<Product> getProductById(int id) {
         for (Product product : products) {
             if (product.id() == id) {
-                return product;
+                return Optional.of(product);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     public List<Product> getAllProducts() {

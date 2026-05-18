@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ProductRepoTest {
@@ -23,19 +25,19 @@ class ProductRepoTest {
         ProductRepo repo = new ProductRepo();
         repo.addProduct(new Product(1, "Iron Sword", 25.0));
 
-        Product result = repo.getProductById(1);
+        Optional<Product> result = repo.getProductById(1);
 
         assertThat(result).isNotNull();
-        assertThat(result.name()).isEqualTo("Iron Sword");
+        assertThat(result.get().name()).isEqualTo("Iron Sword");
     }
 
     @Test
-    void getProductById_shouldReturnNull_whenProductDoesNotExist() {
+    void getProductById_shouldReturnEmpty_whenProductDoesNotExist() {
         ProductRepo repo = new ProductRepo();
 
-        Product result = repo.getProductById(99);
+        Optional<Product> result = repo.getProductById(99);
 
-        assertThat(result).isNull();
+        assertThat(result).isEmpty();
     }
 
     @Test

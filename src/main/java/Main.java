@@ -1,10 +1,11 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main() {
 
         // constructing the repositories and the service + scanner
 
@@ -57,8 +58,8 @@ public class Main {
                 int id = scanner.nextInt();
                 scanner.nextLine();
 
-                Product found = productRepo.getProductById(id);
-                if (found != null) {
+                Optional<Product> found = productRepo.getProductById(id);
+                if (found.isPresent()) {
                     System.out.println(ConsoleColors.success("Found: " + found));
                 } else {
                     System.out.println(ConsoleColors.error("Product not found."));
@@ -83,11 +84,10 @@ public class Main {
                     System.out.print(ConsoleColors.prompt("Quantity: "));
                     int quantity = scanner.nextInt();
                     scanner.nextLine();
-
-                    Product product = productRepo.getProductById(productId);
-                    if (product != null) {
-                        items.add(new OrderItem(product, quantity));
-                        System.out.println(ConsoleColors.success(product.name() + " x" + quantity + " added."));
+                    Optional<Product> product = productRepo.getProductById(productId);
+                    if (product.isPresent()) {
+                        items.add(new OrderItem(product.get(), quantity));
+                        System.out.println(ConsoleColors.success(product.get().name() + " x" + quantity + " added."));
                     } else {
                         System.out.println(ConsoleColors.error("Product with ID " + productId + " not found."));
                     }
@@ -96,8 +96,12 @@ public class Main {
                 if (!items.isEmpty()) {
                     Order order = new Order(nextOrderId, items, OrderStatus.PROCESSING);
                     nextOrderId++;
-                    shopService.placeOrder(order);
-                    System.out.println(ConsoleColors.success("Order total: " + order.getTotal()));
+                    try {
+                        shopService.placeOrder(order);
+                        System.out.println(ConsoleColors.success("Order total: " + order.getTotal()));
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(ConsoleColors.error(e.getMessage()));
+                    }
                 } else {
                     System.out.println(ConsoleColors.warning("No valid items. Order cancelled."));
                 }

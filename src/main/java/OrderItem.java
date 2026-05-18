@@ -1,3 +1,5 @@
+import java.util.Optional;
+
 public class OrderItem {
 
     private final Product product;
