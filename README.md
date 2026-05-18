@@ -40,6 +40,11 @@ to `master`. See the badge above for current build status.
 - Input reader for CLI usage :white_check_mark:
 - Color and format adjusted for outputs :white_check_mark:
 - EAN database for input (CSV format) :white_check_mark:
+- added order status via Enums :white_check_mark:
+- returning empty Optionals instead of null :white_check_mark:
+- Exception handling, if product does not exist :white_check_mark:
+- Order class from record to Lombok support :white_check_mark:
+- added updateOrder method :white_check_mark:
 - advanced product information (tracking of stock, error when not enough stock)
 - control of stock for receiving and sending
 - protocol for every action in the warehouse
