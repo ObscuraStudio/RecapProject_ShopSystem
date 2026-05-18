@@ -23,7 +23,7 @@ class ShopServiceTest {
                 new OrderItem(new Product(1, "Iron Sword", 25.0), 3),
                 new OrderItem(new Product(3, "Iron Armor", 40.0), 1),
                 new OrderItem(new Product(5, "Iron Boots", 20.0), 2)
-        ));
+        ), OrderStatus.PROCESSING);
         shopService.placeOrder(testOrder);
 
         assertThat(orderRepo.getAllOrders()).hasSize(1);

@@ -12,7 +12,7 @@ class OrderListRepoTest {
         Order testOrder = new Order(1, Collections.singletonList
                 (new OrderItem
                         (new Product(1, "Iron Sword", 25.0), 3
-                        )));
+                        )), OrderStatus.PROCESSING);
 
         repo.addOrder(testOrder);
         assertThat(repo.getAllOrders()).hasSize(1);
@@ -25,7 +25,7 @@ class OrderListRepoTest {
         Order testOrder = new Order(1, Collections.singletonList
                 (new OrderItem
                         (new Product(1, "Iron Sword", 25.0), 3
-                        )));
+                        )), OrderStatus.PROCESSING);
 
         repo.addOrder(testOrder);
         repo.removeOrder(1);
@@ -38,7 +38,7 @@ class OrderListRepoTest {
         Order testOrder = new Order(1, Collections.singletonList
                 (new OrderItem
                         (new Product(1, "Iron Sword", 25.0), 3
-                        )));
+                        )), OrderStatus.PROCESSING);
         repo.addOrder(testOrder);
         Order result = repo.getOrderById(1);
         assertThat(result).isNotNull();
