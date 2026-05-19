@@ -46,6 +46,7 @@ to `master`. See the badge above for current build status.
 - Order class from record to Lombok support :white_check_mark:
 - added updateOrder method :white_check_mark:
 - implemented UUID generation :white_check_mark:
+- timestamps added at order creation and sorting by oldest order :white_check_mark:
 - advanced product information (tracking of stock, error when not enough stock)
 - control of stock for receiving and sending
 - protocol for every action in the warehouse
