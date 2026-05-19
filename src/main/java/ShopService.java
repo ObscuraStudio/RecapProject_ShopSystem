@@ -1,5 +1,10 @@
+import java.time.Instant;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ShopService {
 
@@ -19,7 +24,7 @@ public class ShopService {
                 throw new IllegalArgumentException("Product with ID " + product.getProduct().id() + " does not exist.");
             }
         }
-        Order order = new Order(idService.generateId(), orderedProducts, OrderStatus.PROCESSING);
+        Order order = new Order(idService.generateId(), orderedProducts, Instant.now(), OrderStatus.PROCESSING);
         orderRepo.addOrder(order);
         System.out.println(ConsoleColors.success("Order placed successfully."));
     }
@@ -38,6 +43,22 @@ public class ShopService {
         return orderRepo.getAllOrders().stream()
                 .filter(order -> order.getStatus() == status)
                 .toList();
+    }
 
+    public Map<OrderStatus, Order> getOldestOrderPerStatus() {
+        // Step 1: Group all orders by their status
+        // Result: { PROCESSING -> [order1, order3], IN_DELIVERY -> [order2] }
+        Map<OrderStatus, List<Order>> grouped = orderRepo.getAllOrders().stream()
+                .collect(Collectors.groupingBy(Order::getStatus));
+
+        // Step 2: For each status, find the order with the earliest timestamp
+        Map<OrderStatus, Order> oldest = new HashMap<>();
+        for (Map.Entry<OrderStatus, List<Order>> entry : grouped.entrySet()) {
+            entry.getValue().stream()
+                    .min(Comparator.comparing(Order::getTimestamp))
+                    .ifPresent(order -> oldest.put(entry.getKey(), order));
+        }
+
+        return oldest;
     }
 }

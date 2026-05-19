@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -81,5 +82,35 @@ class ShopServiceTest {
         assertThatThrownBy(() -> shopService.updateOrder(UUID.randomUUID(), OrderStatus.IN_DELIVERY))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("does not exist");
+    }
+
+    @Test
+    void getOldestOrderPerStatus_shouldReturnOldestOrderForEachStatus() {
+        ProductRepo productRepo = new ProductRepo();
+        OrderMapRepo orderRepo = new OrderMapRepo();
+        IdService idService = new IdServiceImpl();
+        ShopService shopService = new ShopService(productRepo, orderRepo, idService);
+        productRepo.addProduct(new Product(1, "Iron Sword", 25.00));
+        productRepo.addProduct(new Product(2, "Iron Boots", 20.00));
+
+        // Place 3 orders — they'll all start as PROCESSING
+        List<OrderItem> items1 = List.of(new OrderItem(new Product(1, "Iron Sword", 25.0), 1));
+        List<OrderItem> items2 = List.of(new OrderItem(new Product(2, "Iron Boots", 20.0), 1));
+        List<OrderItem> items3 = List.of(new OrderItem(new Product(1, "Iron Sword", 25.0), 2));
+
+        shopService.placeOrder(items1); // oldest
+        shopService.placeOrder(items2);
+        shopService.placeOrder(items3);
+
+        // Move the second order to IN_DELIVERY
+        UUID secondOrderId = orderRepo.getAllOrders().get(1).getId();
+        shopService.updateOrder(secondOrderId, OrderStatus.IN_DELIVERY);
+
+        Map<OrderStatus, Order> oldest = shopService.getOldestOrderPerStatus();
+
+        // Should have 2 entries: one for PROCESSING, one for IN_DELIVERY
+        assertThat(oldest).hasSize(2);
+        assertThat(oldest).containsKey(OrderStatus.PROCESSING);
+        assertThat(oldest).containsKey(OrderStatus.IN_DELIVERY);
     }
 }

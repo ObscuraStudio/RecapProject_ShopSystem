@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -14,7 +15,7 @@ class OrderListRepoTest {
         Order testOrder = new Order(orderId, Collections.singletonList
                 (new OrderItem
                         (new Product(1, "Iron Sword", 25.0), 3
-                        )), OrderStatus.PROCESSING);
+                        )), Instant.now(), OrderStatus.PROCESSING);
 
         repo.addOrder(testOrder);
         assertThat(repo.getAllOrders()).hasSize(1);
@@ -28,7 +29,7 @@ class OrderListRepoTest {
         Order testOrder = new Order(orderId, Collections.singletonList
                 (new OrderItem
                         (new Product(1, "Iron Sword", 25.0), 3
-                        )), OrderStatus.PROCESSING);
+                        )), Instant.now(), OrderStatus.PROCESSING);
 
         repo.addOrder(testOrder);
         repo.removeOrder(orderId);
@@ -42,7 +43,7 @@ class OrderListRepoTest {
         Order testOrder = new Order(orderId, Collections.singletonList
                 (new OrderItem
                         (new Product(1, "Iron Sword", 25.0), 3
-                        )), OrderStatus.PROCESSING);
+                        )), Instant.now(), OrderStatus.PROCESSING);
         repo.addOrder(testOrder);
         Order result = repo.getOrderById(orderId);
         assertThat(result).isNotNull();

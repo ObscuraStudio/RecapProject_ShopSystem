@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.With;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Getter
@@ -12,6 +13,7 @@ public class Order {
 
     private final UUID id;
     private final List<OrderItem> products;
+    private final Instant timestamp;
     @With
     private OrderStatus status;
 
