@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,46 +10,49 @@ class OrderListRepoTest {
     @Test
     void addOrder_shouldAddOrderToList() {
         OrderListRepo repo = new OrderListRepo();
-        Order testOrder = new Order(1, Collections.singletonList
+        UUID orderId = UUID.randomUUID();
+        Order testOrder = new Order(orderId, Collections.singletonList
                 (new OrderItem
                         (new Product(1, "Iron Sword", 25.0), 3
                         )), OrderStatus.PROCESSING);
 
         repo.addOrder(testOrder);
         assertThat(repo.getAllOrders()).hasSize(1);
-        assertThat(repo.getAllOrders().get(0).getId()).isEqualTo(1);
+        assertThat(repo.getAllOrders().get(0).getId()).isEqualTo(orderId);
     }
 
     @Test
     void removeOrder_shouldRemoveOrderFromList() {
         OrderListRepo repo = new OrderListRepo();
-        Order testOrder = new Order(1, Collections.singletonList
+        UUID orderId = UUID.randomUUID();
+        Order testOrder = new Order(orderId, Collections.singletonList
                 (new OrderItem
                         (new Product(1, "Iron Sword", 25.0), 3
                         )), OrderStatus.PROCESSING);
 
         repo.addOrder(testOrder);
-        repo.removeOrder(1);
+        repo.removeOrder(orderId);
         assertThat(repo.getAllOrders()).isEmpty();
     }
 
     @Test
     void getOrderById_shouldReturnOrder_IfOrderExists() {
         OrderListRepo repo = new OrderListRepo();
-        Order testOrder = new Order(1, Collections.singletonList
+        UUID orderId = UUID.randomUUID();
+        Order testOrder = new Order(orderId, Collections.singletonList
                 (new OrderItem
                         (new Product(1, "Iron Sword", 25.0), 3
                         )), OrderStatus.PROCESSING);
         repo.addOrder(testOrder);
-        Order result = repo.getOrderById(1);
+        Order result = repo.getOrderById(orderId);
         assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo(1);
+        assertThat(result.getId()).isEqualTo(orderId);
     }
 
     @Test
     void getOrderById_shouldReturnNull_IfOrderDoesNotExist() {
         OrderListRepo repo = new OrderListRepo();
-        Order result = repo.getOrderById(99);
+        Order result = repo.getOrderById(UUID.randomUUID());
         assertThat(result).isNull();
     }
 
