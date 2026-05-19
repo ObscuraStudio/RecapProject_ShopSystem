@@ -1,26 +1,28 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.UUID;
 
 public class OrderMapRepo implements OrderRepo {
 
-    private final Map<Integer, Order> orders = new HashMap<>();
+    private final Map<UUID, Order> orders = new HashMap<>();
 
     public void addOrder(Order order) {
         orders.put(order.getId(), order);
     }
 
-    public void removeOrder(int id) {
+    public void removeOrder(UUID id) {
         orders.remove(id);
     }
 
-    public Order getOrderById(int id) {
+    public Order getOrderById(UUID id) {
         return orders.get(id);
     }
 
     public List<Order> getAllOrders() {
         for (Order order : orders.values()) {
-            System.out.println("  [Order " + order.getId() + "]");
+            String shortId = order.getId().toString().substring(0, 8);
+            System.out.println("  [Order #" + shortId + "]");
             for (OrderItem item : order.getProducts()) {
                 System.out.println("    - " + item.getProduct().name() + " x" + item.getQuantity() + " (" + item.getProduct().price() + " Gil each)");
             }

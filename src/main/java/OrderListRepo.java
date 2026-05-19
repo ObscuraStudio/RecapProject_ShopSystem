@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class OrderListRepo implements OrderRepo {
 
@@ -11,9 +12,9 @@ public class OrderListRepo implements OrderRepo {
         orders.add(order);
     }
 
-    public void removeOrder(int id) {
+    public void removeOrder(UUID id) {
         for (int i = 0; i < orders.size(); i++) {
-            if (orders.get(i).getId() == id) {
+            if (orders.get(i).getId().equals(id)) {
                 Order order = orders.get(i);
                 orders.remove(i);
                 return;
@@ -22,9 +23,9 @@ public class OrderListRepo implements OrderRepo {
         System.out.println("Order not found.");
     }
 
-    public Order getOrderById(int id) {
+    public Order getOrderById(UUID id) {
         for (Order order : orders) {
-            if (order.getId() == id) {
+            if (order.getId().equals(id)) {
                 return order;
             }
         }

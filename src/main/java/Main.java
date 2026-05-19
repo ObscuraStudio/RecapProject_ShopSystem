@@ -1,7 +1,4 @@
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -12,9 +9,9 @@ public class Main {
         ProductRepo productRepo = new ProductRepo();
         CsvProductLoader.loadProducts(productRepo, "products.csv");
         OrderMapRepo orderRepo = new OrderMapRepo();
-        ShopService shopService = new ShopService(productRepo, orderRepo);
+        IdService idService = new IdServiceImpl();
+        ShopService shopService = new ShopService(productRepo, orderRepo, idService);
         Scanner scanner = new Scanner(System.in);
-        int nextOrderId = 1;
 
         // main menu loop
 
@@ -94,11 +91,8 @@ public class Main {
                 }
 
                 if (!items.isEmpty()) {
-                    Order order = new Order(nextOrderId, items, OrderStatus.PROCESSING);
-                    nextOrderId++;
                     try {
-                        shopService.placeOrder(order);
-                        System.out.println(ConsoleColors.success("Order total: " + order.getTotal()));
+                        shopService.placeOrder(items);
                     } catch (IllegalArgumentException e) {
                         System.out.println(ConsoleColors.error(e.getMessage()));
                     }
