@@ -45,6 +45,7 @@ to `master`. See the badge above for current build status.
 - Exception handling, if product does not exist :white_check_mark:
 - Order class from record to Lombok support :white_check_mark:
 - added updateOrder method :white_check_mark:
+- implemented UUID generation :white_check_mark:
 - advanced product information (tracking of stock, error when not enough stock)
 - control of stock for receiving and sending
 - protocol for every action in the warehouse
